@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpService } from './services/http.service';
 import { ForecastDay } from './classes/forecast-day';
 import { Subscriber, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private forecastDay: ForecastDay;
   private subscriber: Subscription;
 
-  constructor (private http: HttpService) {}
+  constructor (private http: HttpService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -29,5 +30,9 @@ export class AppComponent implements OnInit, OnDestroy {
    this.subscriber = this.http.getCoordsnates().subscribe(coords => {
       this.http.getCurrentForecastInHoursByCoordinates(coords).subscribe(data => this.forecastDay = new ForecastDay(data as any));
     });
+  }
+
+  redirectToTenDaysForecast() {
+    this.router.navigateByUrl('/forecastTenDays');
   }
 }

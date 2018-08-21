@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../services/http.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-current-location',
@@ -10,12 +11,13 @@ export class CurrentLocationComponent implements OnInit {
 
   @Output() getC = new EventEmitter;
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, private router: Router) { }
 
   ngOnInit() {
   }
 
   getForecastByCoordinates() {
+    // this.router.navigate(['']);
     return this.getC.emit();
   }
 }

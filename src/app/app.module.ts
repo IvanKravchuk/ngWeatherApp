@@ -10,6 +10,8 @@ import { CurrentLocationComponent } from './components/current-location/current-
 import { InputLocationComponent } from './components/input-location/input-location.component';
 import { CurrentForecastHourComponent } from './components/current-forecast-hour/current-forecast-hour.component';
 import { HeaderComponent } from './components/header/header.component';
+import { TenDaysForecastComponent } from './components/ten-days-forecast/ten-days-forecast.component';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -18,12 +20,14 @@ import { HeaderComponent } from './components/header/header.component';
     CurrentLocationComponent,
     InputLocationComponent,
     CurrentForecastHourComponent,
-    HeaderComponent
+    HeaderComponent,
+    TenDaysForecastComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]

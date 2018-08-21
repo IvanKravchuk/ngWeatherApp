@@ -25,12 +25,15 @@ export class HttpService {
   }
 
   getCurrentForecastInHoursByName(cityName): Observable<ForecastDay> {
+    // tslint:disable-next-line:max-line-length
     return this.http.get<ForecastDay>('https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + ',UA&appid=' + this.apiKey + '&units=metric');
   }
 
   getCurrentForecastInHoursByCoordinates(coordinates): Observable<ForecastDay> {
     const search: URLSearchParams = new URLSearchParams();
+    // tslint:disable-next-line:radix
     search.set('lat', parseInt(coordinates.lat).toString());
+    // tslint:disable-next-line:radix
     search.set('lon', parseInt(coordinates.lon).toString());
     search.set('appid', this.apiKey);
     search.set('units', 'metric');
@@ -38,15 +41,14 @@ export class HttpService {
     return this.http.get<ForecastDay>('https://api.openweathermap.org/data/2.5/forecast?' + search.toString() );
   }
 
-  getCoordsnates(){
+  getCoordsnates() {
     return new Observable((observer) => {
-      const window = getWindow(); 
-      if(window.navigator.geolocation) {
-        window.navigator.geolocation.getCurrentPosition(function(pos){
+      const window = getWindow();
+      if (window.navigator.geolocation) {
+        window.navigator.geolocation.getCurrentPosition(function(pos) {
           observer.next({ lat: pos.coords.latitude, lon: pos.coords.longitude });
         });
       }
     });
   }
-  
 }
