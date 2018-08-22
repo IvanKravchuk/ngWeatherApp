@@ -9,15 +9,19 @@ import { Router } from '@angular/router';
 })
 export class CurrentLocationComponent implements OnInit {
 
-  @Output() getC = new EventEmitter;
+  // @Output() getC = new EventEmitter;
 
   constructor(private http: HttpService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  getForecastByCoordinates() {
-    // this.router.navigate(['']);
-    return this.getC.emit();
+  routeToForecastByCoordinates() {
+    this.router.navigate(['/forecastByLocation']);
   }
+
+  // getForecastByCoordinates() {
+  //   // this.router.navigate(['']);
+  //   return this.getC.emit();
+  // }
 }

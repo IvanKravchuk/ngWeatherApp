@@ -22,17 +22,18 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscriber.unsubscribe();
   }
 
-  searchCityName(cityName: string) {
-    this.http.getCurrentForecastInHoursByName(cityName).subscribe(data => this.forecastDay = new ForecastDay(data as any));
-  }
 
-  getCoordsnates() {
-   this.subscriber = this.http.getCoordsnates().subscribe(coords => {
-      this.http.getCurrentForecastInHoursByCoordinates(coords).subscribe(data => this.forecastDay = new ForecastDay(data as any));
-    });
-  }
+  // searchCityName(cityName: string) {
+  //   this.http.getCurrentForecastInHoursByName(cityName).subscribe(data => this.forecastDay = new ForecastDay(data as any));
+  // }
 
-  redirectToTenDaysForecast() {
-    this.router.navigateByUrl('/forecastTenDays');
-  }
+  // getCoordsnates() {
+  //  this.subscriber = this.http.getCoordsnates().subscribe(coords => {
+  //     this.http.getCurrentForecastInHoursByCoordinates(coords).subscribe(data => this.forecastDay = new ForecastDay(data as any));
+  //   });
+  // }
+
+  // redirectToTenDaysForecast() {
+  //   this.router.navigateByUrl('/forecastTenDays');
+  // }
 }

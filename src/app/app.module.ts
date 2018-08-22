@@ -12,6 +12,7 @@ import { CurrentForecastHourComponent } from './components/current-forecast-hour
 import { HeaderComponent } from './components/header/header.component';
 import { TenDaysForecastComponent } from './components/ten-days-forecast/ten-days-forecast.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     InputLocationComponent,
     CurrentForecastHourComponent,
     HeaderComponent,
-    TenDaysForecastComponent
+    TenDaysForecastComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
