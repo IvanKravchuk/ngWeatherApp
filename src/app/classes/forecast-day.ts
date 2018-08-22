@@ -4,6 +4,11 @@ export class ForecastDay {
 
     constructor({ city, list }) {
         this.cityName = city.name;
-        this.list = list.map(({ dt_txt, main }) => ({ date: dt_txt, temp: main.temp, pressure: main.pressure }));
+        this.list = list.map(({ dt_txt, main }) => ({
+            date: dt_txt,
+            temp: main.temp,
+            pressure: main.pressure,
+            humidity: main.humidity
+        }));
     }
 }

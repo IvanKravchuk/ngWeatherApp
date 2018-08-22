@@ -11,10 +11,13 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
+  public disabled: boolean;
   private forecastDay: ForecastDay;
   private subscriber: Subscription;
 
-  constructor (private http: HttpService, private router: Router) {}
+  constructor (private http: HttpService, private router: Router) {
+    this.disabled = true;
+  }
 
   ngOnInit(): void {}
 
@@ -22,18 +25,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscriber.unsubscribe();
   }
 
+  redirectToTenDaysForecast() {
+    this.router.navigate(['/forecastTenDays']);
+  }
 
-  // searchCityName(cityName: string) {
-  //   this.http.getCurrentForecastInHoursByName(cityName).subscribe(data => this.forecastDay = new ForecastDay(data as any));
-  // }
-
-  // getCoordsnates() {
-  //  this.subscriber = this.http.getCoordsnates().subscribe(coords => {
-  //     this.http.getCurrentForecastInHoursByCoordinates(coords).subscribe(data => this.forecastDay = new ForecastDay(data as any));
-  //   });
-  // }
-
-  // redirectToTenDaysForecast() {
-  //   this.router.navigateByUrl('/forecastTenDays');
-  // }
+  disableForecastTenDays(disabled: boolean) {
+    this.disabled = disabled;
+  }
 }

@@ -1,5 +1,4 @@
-<app-input-location (searchCityName)=searchCityName($event)></app-input-location>
-<app-current-location (getC)=getCoordsnates()></app-current-location>
-<button (click)="redirectToTenDaysForecast();">forecast 10 days</button>
+<app-input-location (disableForecastTenDays)=disableForecastTenDays($event)></app-input-location>
+<app-current-location></app-current-location>
+<button [disabled]=disabled (click)="redirectToTenDaysForecast();">forecast 10 days</button>
 <router-outlet></router-outlet>
-<!-- <app-current-forecast [forecastDay]="forecastDay"></app-current-forecast> -->

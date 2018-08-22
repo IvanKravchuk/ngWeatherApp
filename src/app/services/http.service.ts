@@ -1,6 +1,5 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { Observable, Subject } from '../../../node_modules/rxjs';
 import { ForecastDay } from '../classes/forecast-day';
 
@@ -11,76 +10,68 @@ function getWindow (): any {
 @Injectable({
   providedIn: 'root'
 })
-export class HttpService implements OnInit {
+export class HttpService {
 
-  apiKey = '25fbfa1ce2c006ee671a84feda01e493';
-  baseUrl = 'https://api.openweathermap.org/data/2.5/weather?q=';
+  private apiKey = '25fbfa1ce2c006ee671a84feda01e493';
+  baseUrl = 'https://api.openweathermap.org/data/2.5/';
   public cityName: string;
-  // private coordinates: Object;
-  myMethod$: Observable<any>;
-    private myMethodSubject = new Subject<any>();
+  public serviceStream$: Observable<any>;
+  private serviceSubject = new Subject<any>();
 
 
   constructor(private http: HttpClient) {
-    this.myMethod$ = this.myMethodSubject.asObservable();
+    this.serviceStream$ = this.serviceSubject.asObservable();
   }
 
-  myMethod(data) { 
-    this.myMethodSubject.next(data);
-  }
-
-  ngOnInit(): void {
-    // this.setCoordsnates();
-  }
-
-  getCurrentForecastByName(cityName): Observable<any> {
-    console.log(this.baseUrl + cityName + '&appid' + this.apiKey);
-    return this.http.get(this.baseUrl + cityName + '&appid=' + this.apiKey);
+  passDataByStream(data) {
+    this.cityName = data;
+    this.serviceSubject.next(data);
   }
 
   getCurrentForecastInHoursByName(cityName): Observable<ForecastDay> {
-    // tslint:disable-next-line:max-line-length
-    return this.http.get<ForecastDay>('https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + ',UA&appid=' + this.apiKey + '&units=metric');
+    const type = 'forecast?';
+    const search: URLSearchParams = new URLSearchParams();
+    search.set('q', cityName);
+    search.set('appid', this.apiKey);
+    search.set('units', 'metric');
+    return this.http.get<ForecastDay>(this.baseUrl + type + search.toString());
   }
 
-  getCoordsnates() {
+  getCurrentForecastInHoursByCoordinates(coordinates): Observable<ForecastDay> {
+    const type = 'forecast?';
+    const search: URLSearchParams = new URLSearchParams();
+    search.set('lat', parseInt(coordinates.lat, 10).toString());
+    search.set('lon', parseInt(coordinates.lon, 10).toString());
+    search.set('appid', this.apiKey);
+    search.set('units', 'metric');
+
+    return this.http.get<ForecastDay>(this.baseUrl + type + search.toString());
+  }
+
+  getCurrentForecastTenDays(cityName): Observable<ForecastDay> {
+    const type = 'forecast/daily?';
+    const search: URLSearchParams = new URLSearchParams();
+    search.set('q', cityName);
+    search.set('appid', this.apiKey);
+    search.set('units', 'metric');
+    search.set('cnt', '10');
+    return this.http.get<ForecastDay>(this.baseUrl + type + search.toString());
+  }
+
+  getCoordinates() {
     return new Promise(res => {
-      this.setCoordsnates(c => {
-        res(c);
+      this.setCoordinates(coordinates => {
+        res(coordinates);
       });
     });
   }
 
-  setCoordsnates (callback){
+  setCoordinates (callback) {
     const window = getWindow();
     if (window.navigator.geolocation) {
-      window.navigator.geolocation.getCurrentPosition((pos) => {
-        console.log(pos);
-        callback({ lat: pos.coords.latitude, lon: pos.coords.longitude });
+      window.navigator.geolocation.getCurrentPosition((position) => {
+        callback({ lat: position.coords.latitude, lon: position.coords.longitude });
       });
     }
   }
-
-  getCurrentForecastInHoursByCoordinates(coordinates): Observable<ForecastDay> {
-    const search: URLSearchParams = new URLSearchParams();
-    // tslint:disable-next-line:radix
-    search.set('lat', parseInt(coordinates.lat).toString());
-    // tslint:disable-next-line:radix
-    search.set('lon', parseInt(coordinates.lon).toString());
-    search.set('appid', this.apiKey);
-    search.set('units', 'metric');
-
-    return this.http.get<ForecastDay>('https://api.openweathermap.org/data/2.5/forecast?' + search.toString() );
-  }
-
-  // getCoordsnates() {
-  //   return new Observable((observer) => {
-  //     const window = getWindow();
-  //     if (window.navigator.geolocation) {
-  //       window.navigator.geolocation.getCurrentPosition(function(pos) {
-  //         observer.next({ lat: pos.coords.latitude, lon: pos.coords.longitude });
-  //       });
-  //     }
-  //   });
-  // }
 }

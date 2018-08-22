@@ -10,23 +10,21 @@ import { Router } from '@angular/router';
 })
 export class CurrentForecastComponent implements OnInit {
 
-  // @Input() private forecastDay: ForecastDay;
-  private cityName: string;
+  // private cityName: string;
   private forecastDay: ForecastDay;
 
   constructor(private http: HttpService, private router: Router) {}
 
   ngOnInit() {
     if (this.router.url === '/forecastByLocation' ) {
-      this.http.getCoordsnates().then(c => {
-        this.http.getCurrentForecastInHoursByCoordinates(c).subscribe(data => this.forecastDay = new ForecastDay(data as any));
+      this.http.getCoordinates().then(coordinates => {
+        this.http.getCurrentForecastInHoursByCoordinates(coordinates).subscribe(data => this.forecastDay = new ForecastDay(data as any));
       });
     }
-    this.http.myMethod$.subscribe((data1) => {
+    this.http.serviceStream$.subscribe((cityName) => {
     if (this.router.url === '/forecastByCityName' ) {
-      console.log(this.cityName);
-        this.cityName = data1;
-        this.http.getCurrentForecastInHoursByName(this.cityName).subscribe(data => this.forecastDay = new ForecastDay(data as any));
+        // this.cityName = cityName;
+        this.http.getCurrentForecastInHoursByName(cityName).subscribe(data => this.forecastDay = new ForecastDay(data as any));
       }
     }
   );

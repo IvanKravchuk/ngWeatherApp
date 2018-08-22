@@ -11,7 +11,6 @@ export class CurrentForecastHourComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }
