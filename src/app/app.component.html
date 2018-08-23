@@ -1,4 +1,5 @@
+<app-header></app-header>
 <app-input-location (disableForecastTenDays)=disableForecastTenDays($event)></app-input-location>
 <app-current-location></app-current-location>
-<button [disabled]=disabled (click)="redirectToTenDaysForecast();">forecast 10 days</button>
+<button class="btn btn-secondary" [disabled]=disabled (click)="redirectToTenDaysForecast();">forecast 10 days</button>
 <router-outlet></router-outlet>

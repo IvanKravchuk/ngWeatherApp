@@ -1,4 +1,4 @@
-<h1>weather in {{ forecastDay?.cityName }}</h1>
+<h1 class="title">weather in {{ forecastDay?.cityName }}</h1>
 <div *ngFor="let forecastHour of forecastDay?.list">
   <app-current-forecast-hour [forecastHour]="forecastHour"></app-current-forecast-hour>  
 </div>

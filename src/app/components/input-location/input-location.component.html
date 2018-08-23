@@ -1,2 +1,13 @@
-<input type="text" value={{cityName}} [(ngModel)]="cityName">
-<button (click)="routeToForecastByCityName()">go</button>
+<div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-secondary" type="button" id="button-addon1" (click)="routeToForecastByCityName()">go</button>
+        </div>
+        <input type="text" class="form-control"  placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value={{cityName}} [(ngModel)]="cityName">
+</div>
+
+<!-- <div class="form-group">
+        <label for="cityName">city name:</label>
+        <input type="text" class="form-control" id="cityName" value={{cityName}} [(ngModel)]="cityName">
+        <button class="btn-info" (click)="routeToForecastByCityName()">go</button>
+</div> -->
+<!-- <input type="text" value={{cityName}} [(ngModel)]="cityName"> -->

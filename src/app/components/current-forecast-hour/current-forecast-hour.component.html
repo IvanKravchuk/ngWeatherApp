@@ -1,7 +1,10 @@
-<div>
-    <h4>date {{forecastHour.date | date:'MM/dd/yyyy h:mm a'}}</h4>
-    <h4>temperature {{forecastHour.temp}}</h4>
-    <h4>pressure {{forecastHour.pressure}}</h4>
-    <h4>humidity {{forecastHour.humidity}}</h4>
-    <hr/>
+<div class="container">
+    <h2>date {{forecastHour.date | date:'MM/dd/yyyy h:mm a'}}</h2>
+    <div class="row">
+        <h4 class="col-sm">weather {{forecastHour.weather}}</h4>
+        <h4 class="col-sm">temperature {{forecastHour.temp}}</h4>
+        <h4 class="col-sm">pressure {{forecastHour.pressure}}</h4>
+        <h4 class="col-sm">humidity {{forecastHour.humidity}}</h4>
+        <hr/>
+    </div>
 </div>

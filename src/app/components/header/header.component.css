@@ -1,0 +1,11 @@
+.wrapper {
+    height: 100px;
+    background-color: dimgrey;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+.header-text {
+    color: orange;
+    margin: 0
+}
