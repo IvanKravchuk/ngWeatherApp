@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrtestComponent implements OnInit {
 
+  public test: string;
   constructor() { }
 
   ngOnInit() {
