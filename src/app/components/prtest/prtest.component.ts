@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrtestComponent implements OnInit {
 
+  constructor(private newVar:number) { }
   public test: string;
-  constructor() { }
 
   ngOnInit() {
   }
